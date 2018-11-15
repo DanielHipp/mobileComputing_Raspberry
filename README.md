@@ -6,4 +6,4 @@
 [Python Guide](https://codingworld.io/project/8x8-led-matrix-anschliessen-und-programmieren)
 
 
-
+![pinout](http://images.gutefrage.net/media/fragen-antworten/bilder/137534877/0_big.jpg)
