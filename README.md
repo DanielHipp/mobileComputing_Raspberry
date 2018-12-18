@@ -8,6 +8,8 @@ To achieve this, the Raspberry Pi activates the WiFi-Chip in Access Point mode, 
 
 The Raspberry Pi only listens on a special port to receive the data, that is to be displayed on the dot matrix.
 
+![Overview](pics/RasPi-MC.svg)
+
 
 ## Installation
 1. Install Raspian on a microSD card for your Raspberry Pi 3
