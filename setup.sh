@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Run as root!
+#
 # What this script does:
 # - Updates packages of raspberry pi
 # - Installs needed packages for the project
@@ -9,18 +10,19 @@
 
 
 ## Update repo
-apt-get update
-apt-get upgrade
+apt-get update && apt-get upgrade
 
 
 # Install needed packages
-apt-get install python-dev python-numpy python3-numpy
+apt-get install python-dev  python-numpy
+apt-get install python3-dev python3-numpy
 
 
 # ToDo: Clone adafruit repos and install for our wrapper
 
 
 # Set up WiFi-Network AP
+# ToDo: Set constant IP for Smartphone and listen to it
 ./WLAN/setup_AccessPoint.sh
 
 
