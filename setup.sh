@@ -22,9 +22,7 @@ apt-get update && apt-get upgrade
 
 
 # Install needed packages
-apt-get install i2c-tools build-essential 
-# Install Python 2 packages
-apt-get install python-dev  python-numpy python-smbus python-imaging
+apt-get install i2c-tools build-essential python-dev  python-numpy python-smbus python-imaging python-setuptools
 
 
 # Clone adafruit repos and install for our wrapper
