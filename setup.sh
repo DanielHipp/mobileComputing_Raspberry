@@ -22,15 +22,14 @@ apt-get update && apt-get upgrade
 
 
 # Install needed packages
-apt-get install i2c-tools
-# Install Python 2 packages
-apt-get install python-dev  python-numpy
-# Install Python 3 packages
-apt-get install python3-dev python3-numpy
+apt-get install i2c-tools build-essential python-dev  python-numpy python-smbus python-imaging python-setuptools
 
 
-# ToDo: Clone adafruit repos and install for our wrapper
-
+# Clone adafruit repos and install for our wrapper
+git clone https://github.com/adafruit/Adafruit_Python_LED_Backpack.git
+cd Adafruit_Python_LED_Backpack
+sudo python setup.py install
+cd ..
 
 # Set up WiFi-Network AP
 # ToDo: Set constant IP for Smartphone and listen to it

@@ -15,9 +15,11 @@ Here is an overview of the networking with the Raspberry Pi, smartphone and the 
 
 ## Installation
 1. Install Raspian on a microSD card for your Raspberry Pi 3
-    1.1 (optional but recommended) Expand the file system with raspi-config
+    - (optional but recommended) Expand the file system with raspi-config
 2. Connect your Raspberry Pi to the Internet via LAN
+3. Install Git ($ sudo apt-get install git)
 3. Clone this repo on your Raspberry Pi
+3. make setup.sh runnable ($ chmod +x setup.sh)
 4. Run setup.sh as root
 5. Reboot the Raspberry Pi
 6. Connect your Smartphone to the Pi's WiFi network
