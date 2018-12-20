@@ -13,11 +13,11 @@ echo "dtparam=i2c1=on" >> /boot/config.txt
 adduser pi i2c
 
 ## Update repo
-apt-get update && apt-get upgrade
+apt-get update && apt-get upgrade -y
 
 
 # Install needed packages
-apt-get install i2c-tools build-essential python-dev  python-numpy python-smbus python-imaging python-setuptools
+apt-get install -yq i2c-tools build-essential python-dev  python-numpy python-smbus python-imaging python-setuptools
 
 
 # Clone adafruit repos and install for our wrapper
