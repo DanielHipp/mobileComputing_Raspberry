@@ -8,10 +8,14 @@
 # - Registers services to run at startup
 
 
-## Enable I²C and add Pi to i2c group to easy usage
-echo "dtparam=i2c1=on" >> /boot/config.txt
-adduser pi i2c
-
+## Test if I²C is enabled and enable I²C otherwise
+## Add Pi to i2c group to easy usage
+ITWOCLOADED=`lsmod | grep i2c_`
+if [[ -z "$ITWOCLOADED" ]]
+then
+	echo "dtparam=i2c1=on" >> /boot/config.txt
+	adduser pi i2c
+fi
 
 ## Update repo
 apt-get update && apt-get upgrade
