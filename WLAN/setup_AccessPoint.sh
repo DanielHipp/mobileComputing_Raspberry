@@ -58,6 +58,8 @@ echo "Setting up  $NIC"                                            | tee -a ${lo
 
 echo "Downloading and installing packages: hostapd isc-dhcp-server iptables." | tee -a ${log_file}
 echo ""
+# Remove current DHCP client because new one will be installed
+apt-get -y remove dhcpcd5
 apt-get -y install hostapd isc-dhcp-server iptables                | tee -a ${log_file} 
 service hostapd stop | tee -a ${log_file} > /dev/null
 service isc-dhcp-server stop  | tee -a ${log_file}  > /dev/null
@@ -96,7 +98,7 @@ echo "Setting up AP..."                                       | tee -a ${log_fil
 
 echo "Configure: /etc/default/isc-dhcp-server"                | tee -a ${log_file} 
 echo "DHCPD_CONF=\"/etc/dhcp/dhcpd.conf\""                    >  /etc/default/isc-dhcp-server
-echo "INTERFACES=\"${NIC}\""                                    >> /etc/default/isc-dhcp-server
+echo "INTERFACES=\"${NIC}\""                                  >> /etc/default/isc-dhcp-server
 
 echo "Configure: /etc/default/hostapd"                        | tee -a ${log_file} 
 echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\""              > /etc/default/hostapd
@@ -110,7 +112,7 @@ echo "  interface ${NIC};"                                    >> /etc/dhcp/dhcpd
 echo "  range ${AP_LOWER_ADDR} ${AP_UPPER_ADDR};"             >> /etc/dhcp/dhcpd.conf
 echo "  option domain-name-servers 46.182.19.48, 8.8.8.8;"    >> /etc/dhcp/dhcpd.conf
 echo "  option domain-name \"home\";"                         >> /etc/dhcp/dhcpd.conf
-echo "  option routers " ${AP_ADDRESS} " ;"                   >> /etc/dhcp/dhcpd.conf
+echo "  option routers "${AP_ADDRESS}";"                      >> /etc/dhcp/dhcpd.conf
 echo "}"                                                      >> /etc/dhcp/dhcpd.conf
 
 echo "Configure: /etc/hostapd/hostapd.conf"                                                     | tee -a ${log_file} 
@@ -185,7 +187,6 @@ service isc-dhcp-server start         | tee -a ${log_file}
 echo "Configure: startup"             | tee -a ${log_file}
 update-rc.d hostapd enable            | tee -a ${log_file}
 update-rc.d isc-dhcp-server enable    | tee -a ${log_file}
-update-rc.d tor enable
 
 
 #Update /etc/rc.local
