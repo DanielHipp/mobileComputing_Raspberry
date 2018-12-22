@@ -33,5 +33,12 @@ cd ..
 
 # Install our server to receive data from smartphone
 
+#Update /etc/rc.local
+#sed '/exit 0/d' /etc/rc.local
+#echo "
+# Our service here!
+#exit 0
+#" >> /etc/rc.local
+
 
 echo "Please reboot your Raspberry Pi!"

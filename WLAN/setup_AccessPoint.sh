@@ -96,7 +96,7 @@ echo "Setting up AP..."                                       | tee -a ${log_fil
 
 echo "Configure: /etc/default/isc-dhcp-server"                | tee -a ${log_file} 
 echo "DHCPD_CONF=\"/etc/dhcp/dhcpd.conf\""                    >  /etc/default/isc-dhcp-server
-echo "INTERFACES=\"$NIC\""                                    >> /etc/default/isc-dhcp-server
+echo "INTERFACES=\"${NIC}\""                                    >> /etc/default/isc-dhcp-server
 
 echo "Configure: /etc/default/hostapd"                        | tee -a ${log_file} 
 echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\""              > /etc/default/hostapd
@@ -106,6 +106,7 @@ echo "ddns-update-style none;"                                >  /etc/dhcp/dhcpd
 echo "default-lease-time 86400;"                              >> /etc/dhcp/dhcpd.conf
 echo "max-lease-time 86400;"                                  >> /etc/dhcp/dhcpd.conf
 echo "subnet ${SUBNET} netmask ${AP_NETMASK} {"               >> /etc/dhcp/dhcpd.conf
+echo "  interface ${NIC};"                                    >> /etc/dhcp/dhcpd.conf
 echo "  range ${AP_LOWER_ADDR} ${AP_UPPER_ADDR};"             >> /etc/dhcp/dhcpd.conf
 echo "  option domain-name-servers 46.182.19.48, 8.8.8.8;"    >> /etc/dhcp/dhcpd.conf
 echo "  option domain-name \"home\";"                         >> /etc/dhcp/dhcpd.conf
