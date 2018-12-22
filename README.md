@@ -20,12 +20,13 @@ Here is an overview of the networking with the Raspberry Pi, smartphone and the 
 3. Install Git ($ sudo apt-get install git)
 4. Clone this repo on your Raspberry Pi
 5. Run setup.sh as root
-6. Reboot the Raspberry Pi
-7. Connect your Smartphone to the Pi's WiFi network ("MC-RaspberryPi")
+6. Connect the dot matrix via SPI to the Raspberry Pi
+7. Reboot the Raspberry Pi
+8. Connect your Smartphone to the Pi's WiFi network ("MC-RaspberryPi")
     - Password is: "0123456789"
     - You still will have internet access through the LAN connection of the Raspberry Pi
-8. Run the App
-9. Done :thumbsup:
+9. Run the App
+10. Done :thumbsup:
 
 
 ## Technical
