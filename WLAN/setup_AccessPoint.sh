@@ -188,17 +188,4 @@ echo "Configure: startup"             | tee -a ${log_file}
 update-rc.d hostapd enable            | tee -a ${log_file}
 update-rc.d isc-dhcp-server enable    | tee -a ${log_file}
 
-
-#Update /etc/rc.local
-sed '/exit 0/d' /etc/rc.local         | tee /etc/rc.local
-echo "sudo service hostapd stop
-sudo service isc-dhcp-server stop
-sudo ifdown wlan0
-sudo ifup wlan0
-sudo service hostapd restart
-sudo service isc-dhcp-server restart
-
-exit 0
-" >> /etc/rc.local
-
 exit 0
