@@ -28,17 +28,30 @@ cd ..
 
 # Set up WiFi-Network AP
 # ToDo: Set constant IP for Smartphone and listen to it
-./WLAN/setup_AccessPoint.sh
+USB=0
+OPTIND=1         # Reset in case getopts has been used previously in the shell
+while getopts "u:" opt; do
+    case "$opt" in
+    u)  USB=1
+        ;;
+    esac
+done
+shift $((OPTIND-1))
 
+if [ $USB -eq 1 ]
+then
+	./WLAN/setup_AccessPoint.sh -u
+else
+	./WLAN/setup_AccessPoint.sh
+fi
 
 # Install our server to receive data from smartphone
-
-#Update /etc/rc.local
-#sed '/exit 0/d' /etc/rc.local
-#echo "
-# Our service here!
-#exit 0
-#" >> /etc/rc.local
+dir=$(pwd)
+sed '/exit 0/d' /etc/rc.local
+echo "
+python $(dir)/Matrix/server_matrix.py
+exit 0
+" >> /etc/rc.local
 
 
 echo "Please reboot your Raspberry Pi!"

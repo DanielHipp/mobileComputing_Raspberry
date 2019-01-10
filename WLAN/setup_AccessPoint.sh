@@ -3,6 +3,10 @@
 # SSID:    MC-RaspberryPi
 # PW:      0123456789
 # Network: 192.168.10.0/24
+# Pi's IP: 192.168.10.1
+# Addresses assigned by DHCP:
+# From:    192.168.10.2
+# To:      192.168.10.4
 # Channel: 9
 
 
@@ -12,9 +16,23 @@ log_file="ap_setup_log.${run_time}"
 
 cat /dev/null > ${log_file}
 
-AP_SSID="MC-RaspberryPi"
-AP_CHANNEL="9"
-AP_WPA_PASSPHRASE="0123456789"
+
+NIC="wlan0"
+WAN="eth0"
+
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the shell
+while getopts "u:" opt; do
+    case "$opt" in
+    u)  WAN="usb0"
+        ;;
+    esac
+done
+shift $((OPTIND-1))
+
+DNS=`netstat -rn | grep ${WAN} | grep UG | tr -s " " "X" | cut -d "X" -f 2`
+echo "DNS will be set to " ${DNS}                                                 | tee -a ${log_file}
+echo "You can change DNS addresses for the new network in /etc/dhcp/dhcpd.conf"   | tee -a ${log_file}
 
 
 if [ `lsusb | grep "RTL8188CUS\|RTL8192CU" | wc -l` -ne 0 ]; then
@@ -25,14 +43,10 @@ if [ `lsusb | grep "RTL8188CUS\|RTL8192CU" | wc -l` -ne 0 ]; then
 fi
 
 
-NIC="wlan0"
-WAN="eth0"
-DNS=`netstat -rn | grep ${WAN} | grep UG | tr -s " " "X" | cut -d "X" -f 2`
-echo "DNS will be set to " ${DNS}                                                 | tee -a ${log_file}
-echo "You can change DNS addresses for the new network in /etc/dhcp/dhcpd.conf"   | tee -a ${log_file}
-
-
-
+# General WiFi settings
+AP_SSID="MC-RaspberryPi"
+AP_CHANNEL="9"
+AP_WPA_PASSPHRASE="0123456789"
 # Specify subnet
 SUBNET="192.168.10.0"
 AP_ADDRESS="192.168.10.1"
