@@ -46,7 +46,7 @@ fi
 
 # Install our server to receive data from smartphone
 dir=$(pwd)
-(crontab -l 2>/dev/null; echo "python $(dir)/Matrix/server_matrix.py &") | crontab -
+(crontab -l 2>/dev/null; echo "python $(dir)/start_matrix_server.py &") | crontab -
 
 
 echo "
