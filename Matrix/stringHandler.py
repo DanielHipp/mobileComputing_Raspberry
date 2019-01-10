@@ -26,12 +26,15 @@ class StringHandler:
             self.matrix.draw_Image(x)
         elif(inpt[0] == self.stringChar):
             if self.matrix is None:
-                print("String:\n",inpt[1:])
+                print("String:\n",self.uncode_String(inpt[1:]))
                 return
-            self.matrix.write_string(inpt[1:])
+            self.matrix.write_string(self.uncode_String(inpt[1:]))
         elif not ignoreErrors:
             raise Exception("Illegal Argument! String has to start with {} or {}".format(self.imgChar,self.stringChar))
         return
+
+    def uncode_String(self, string):
+        return string.replace("%20", " ").upper()
 
     def handleImage(self, img):
         assert isinstance(img, str)
