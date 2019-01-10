@@ -12,7 +12,7 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.end_headers()
         # Send the html message
         #self.wfile.write("JA?")
-        request_path = self.path
+        request_path = self.path[1:]
         STRINGHANDLER.handleString(request_path,ignoreErrors=True)
         #print("path:\t",request_path)
         #print("headers:\t",self.headers)
