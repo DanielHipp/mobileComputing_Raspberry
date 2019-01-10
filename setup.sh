@@ -27,7 +27,6 @@ sudo python setup.py install
 cd ..
 
 # Set up WiFi-Network AP
-# ToDo: Set constant IP for Smartphone and listen to it
 USB=0
 OPTIND=1         # Reset in case getopts has been used previously in the shell
 while getopts "u:" opt; do
@@ -49,9 +48,10 @@ fi
 dir=$(pwd)
 sed '/exit 0/d' /etc/rc.local
 echo "
-python $(dir)/Matrix/server_matrix.py
+python $(dir)/Matrix/server_matrix.py &
 exit 0
 " >> /etc/rc.local
 
 
-echo "Please reboot your Raspberry Pi!"
+echo "
+Please reboot your Raspberry Pi!"
