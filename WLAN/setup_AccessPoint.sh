@@ -75,8 +75,8 @@ echo ""
 # Remove current DHCP client because new one will be installed
 apt-get -y remove dhcpcd5
 apt-get -y install hostapd isc-dhcp-server iptables                | tee -a ${log_file} 
-service hostapd stop | tee -a ${log_file} > /dev/null
-service isc-dhcp-server stop  | tee -a ${log_file}  > /dev/null
+service hostapd stop                                               | tee -a ${log_file} > /dev/null
+service isc-dhcp-server stop                                       | tee -a ${log_file}  > /dev/null
 echo ""                                                            | tee -a ${log_file} 
 
 echo "Backups:"                                                    | tee -a ${log_file}
