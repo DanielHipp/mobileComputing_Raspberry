@@ -49,7 +49,7 @@ LED, dot matrix, LED matrix, Android, smartphone, WiFi, notification
 \section{Introduction}
 The goal of this project is to provide a screen to show notifications and text from a smartphone so that they are better visible. The next step is to provide image thumbnails on the screeen.
 
-Án inexpensive replacement for a screen is a dot matrix, that can be easily connected to an Arduino or Raspberry Pi. Due to the networking requirement of the task the Raspberry Pi version 3 seems to be the better choice over an Arduino. The latest Raspberry Pi has multiple network interfaces, such as LAN, WiFi and Bluetooth.
+An inexpensive replacement for a screen is a dot matrix, that can be easily connected to an Arduino or Raspberry Pi. Due to the networking requirement of the task the Raspberry Pi version 3 seems to be the better choice over an Arduino. The latest Raspberry Pi has multiple network interfaces, such as LAN, WiFi and Bluetooth.
 
 
 \section{State of the Art}
@@ -57,16 +57,32 @@ The goal of this project is to provide a screen to show notifications and text f
 
 
 \section{Proposed approach}
-Some text
+The application needs a server and a client, to receive text and image or to send them, respectively.
+
+Because text can be easily sent over the HTTP protocol, and 16x16 (=256) digits (0 or 1) for the iamges can be easily converted to text, we chose HTTP for transmission between the Raspberry Pi and smartphone.
+
 
 \subsection{Coose the matrix}
+The matrix must be compatible with the Rasbperry Pi, but for testing the matrix itself the compatibility to Arduino is desirable. So the protocol must be either SPI or I2C, because both are supported on Raspberry Pi and Arduino.
+
+It also must not consume more energy than the Raspbery Pi and Arduiono can provide. So it must work at a volate of 3.3V or 5V and must draw at most 50mA and 300mA repectively\cite{b0};
+
 
 \subsection{Communication}
+For communication between Raspberry Pi and smartphone we have two possibilities: either Bluetooth or over a local network. Since the user may already have the smartphone connected to a headphone or headset, we chose to use the smartphone's Wifi interface.
 
-\subsubsection{Overview}
+The Raspberry Pi has a LAN and WiFi interface, so we chose to create a new WiFi access point with the Raspberry Pi. This way we can make sure that the Raspberry Pi always has the same IP address, which makes connecting easier. To ensure the normal usage of the smartphone, after it connected to the Raspberry Pi, it must be connected to the existing router by a LAN cable prior to installation. This makes it also easier to set up the Raspberry Pi, because no WiFi passphrase of the original WiFi must be entered. Figure~\ref{FIG:COMMUNICATION} shows an overview of the communication.
+
+\begin{figure}
+\label{FIG:COMMUNICATION}
+\includegraphics[width=\linewidth]{pics/RasPi-MC}
+\caption{Communication overview between Raspberry Pi, Smartphone and Router}
+\end{figure}
 
 \subsection{Communication between the Client and Server}
 
+
+\subsection{Communication between Raspberry Pi and the matrix}
 
 
 \section{Results}
@@ -109,6 +125,7 @@ For papers published in translation journals, please give the English
 citation first, followed by the original foreign-language citation \cite{b6}.
 
 \begin{thebibliography}{00}
+\bibitem{b0} Elinux.org, ``RPi Low-level peripherals'' https://elinux.org/Rpi\_Low-level\_peripherals\#General\_Purpose\_Input.2FOutput\_.28GPIO.29, 2019
 \bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
 \bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
 \bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
@@ -117,8 +134,4 @@ citation first, followed by the original foreign-language citation \cite{b6}.
 \bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
 \bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
 \end{thebibliography}
-\vspace{12pt}
-\color{red}
-IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
-
 \end{document}
