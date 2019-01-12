@@ -75,13 +75,14 @@ If the full matrix is not composed of one single panel, the smaller pannels must
 \section{Results}
 
 \subsection{Difficulties}
+Difficulties arose from the first matrix that we used. It was controlled by a MAX7219 chip, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{b1} worked on our Raspberry Pi 3. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit.
 
 \subsection{Communication}
 For communication between Raspberry Pi and smartphone we have two possibilities: either Bluetooth or over a local network. Since the user may already have the smartphone connected to a headphone or headset, we chose to use the smartphone's Wifi interface.
 
 The Raspberry Pi has a LAN and WiFi interface, so we chose to create a new WiFi access point with the Raspberry Pi. This way we can make sure that the Raspberry Pi always has the same IP address, which makes connecting easier. To ensure the normal usage of the smartphone, after it connected to the Raspberry Pi, it must be connected to the existing router by a LAN cable prior to installation. This makes it also easier to set up the Raspberry Pi, because no WiFi passphrase of the original WiFi must be entered. Figure~\ref{FIG:COMMUNICATION} shows an overview of the communication.
 
-\begin{figure}
+\begin{figure}[ht]
 \label{FIG:COMMUNICATION}
 \centering
 \includegraphics[width=0.75\linewidth]{pics/RasPi-MC}
@@ -118,34 +119,8 @@ If the message contains also other ASCII characters, it will be interpreted as a
 
 
 \section*{References}
-
-Please number citations consecutively within brackets \cite{b1}. The 
-sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
-number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
-the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
-
-Number footnotes separately in superscripts. Place the actual footnote at 
-the bottom of the column in which it was cited. Do not put footnotes in the 
-abstract or reference list. Use letters for table footnotes.
-
-Unless there are six authors or more give all authors' names; do not use 
-``et al.''. Papers that have not been published, even if they have been 
-submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
-that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
-Capitalize only the first word in a paper title, except for proper nouns and 
-element symbols.
-
-For papers published in translation journals, please give the English 
-citation first, followed by the original foreign-language citation \cite{b6}.
-
 \begin{thebibliography}{00}
 \bibitem{b0} Elinux.org, ``RPi Low-level peripherals'' https://elinux.org/Rpi\_Low-level\_peripherals\#General\_Purpose\_Input.2FOutput\_.28GPIO.29, 2019
-\bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
-\bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
-\bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
-\bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
-\bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
-\bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
-\bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
+\bibitem{b1} AZ-Delivery, ``4 x 64er LED Matrix Display'', https://www.az-delivery.de/products/4-x-64er-led-matrix-display?ls=de\&cache=false, 12. 01. 2019
 \end{thebibliography}
 \end{document}
