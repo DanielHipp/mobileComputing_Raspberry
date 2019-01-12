@@ -75,7 +75,7 @@ If the full matrix is not composed of one single panel, the smaller pannels must
 \section{Results}
 
 \subsection{Difficulties}
-Difficulties arose from the first matrix that we used. It was controlled by a MAX7219 chip, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{b1} worked on our Raspberry Pi 3. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit.
+Difficulties arose from the first matrix that we used. It was controlled by a MAX7219 chip, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{b1} worked on our Raspberry Pi 3. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit\cite{b2}.
 
 \subsection{Communication}
 For communication between Raspberry Pi and smartphone we have two possibilities: either Bluetooth or over a local network. Since the user may already have the smartphone connected to a headphone or headset, we chose to use the smartphone's Wifi interface.
@@ -121,5 +121,6 @@ If the message contains also other ASCII characters, it will be interpreted as a
 \begin{thebibliography}{00}
 \bibitem{b0} Elinux.org, ``RPi Low-level peripherals'' https://elinux.org/Rpi\_Low-level\_peripherals\#General\_Purpose\_Input.2FOutput\_.28GPIO.29, 2019
 \bibitem{b1} AZ-Delivery, ``4 x 64er LED Matrix Display'', https://www.az-delivery.de/products/4-x-64er-led-matrix-display?ls=de\&cache=false, 12. 01. 2019
+\bibitem{b2} Adafruit, ``Adafruit Mini 8x8 LED Matrix w/I2C Backpack - Yellow'', https://www.adafruit.com/product/870, 12. 01. 2019
 \end{thebibliography}
 \end{document}
