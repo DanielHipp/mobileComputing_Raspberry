@@ -11,9 +11,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Dot Matrix Notifier\\
-\thanks{Identify applicable funding agency here. If none, delete this.}
-}
+\title{Dot Matrix Notifier}
 
 \author{\IEEEauthorblockN{Daniel Hipp}
 \IEEEauthorblockA{\textit{Faculty of Computer Science} \\
@@ -65,7 +63,9 @@ Because text can be easily sent over the HTTP protocol, and 16x16 (=256) digits 
 \subsection{Coose the matrix}
 The matrix must be compatible with the Rasbperry Pi, but for testing the matrix itself the compatibility to Arduino is desirable. So the protocol must be either SPI or I2C, because both are supported on Raspberry Pi and Arduino.
 
-It also must not consume more energy than the Raspbery Pi and Arduiono can provide. So it must work at a volate of 3.3V or 5V and must draw at most 50mA and 300mA repectively\cite{b0};
+It also must not consume more energy than the Raspbery Pi and Arduiono can provide. So it must work at a volate of 3.3V or 5V and must draw at most 50mA and 300mA repectively\cite{b0}.
+
+If the full matrix is not composed of one single panel, the smaller pannels must be addressable individually. So that a wrapper library can be built that acts as a sinle panel and outputs part of the image on the respective sub-panel.
 
 
 \subsection{Communication}
@@ -90,7 +90,11 @@ The DHCP server must assign an address to the smartphone connecting to the WiFi.
 Iptables is configured so that the smartphone in the Raspberry Pi's WiFi can access the internet through NAT at the Pi's LAN interface. This is solved that way, that new connections from the WiFi are accepted, but no new connections from the LAN NIC. Packages at the LAN NIC are only accepted, when they belong to an existing connection.
 
 \subsection{Communication between the Client and Server}
+The communication between the server software on the Raspberry Pi and the client on the smartphone is done with HTTP requests. Only strings can be sent to the Raspberry Pi, so images gave to be encoded as strings.
 
+If the received strings only contains zeroes and is 256 (16x16) numbers long, it will be interpreted as an binary image and directly outputted on the dot matrix.
+
+If the message contains also other ASCII characters, it will be interpreted as a string. Special characters (i.e. apersand, space) must be escaped before sending to the Raspberry Pi. The characters are converted with a special font to images and outputted on the matrix.
 
 \subsection{Communication between Raspberry Pi and the matrix}
 
