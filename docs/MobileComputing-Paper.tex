@@ -67,6 +67,14 @@ It also must not consume more energy than the Raspbery Pi and Arduiono can provi
 
 If the full matrix is not composed of one single panel, the smaller pannels must be addressable individually. So that a wrapper library can be built that acts as a sinle panel and outputs part of the image on the respective sub-panel.
 
+\subsection{Communication between Raspberry Pi and the matrix}
+
+\subsection{Communication between the Client and Server}
+
+
+\section{Results}
+
+\subsection{Difficulties}
 
 \subsection{Communication}
 For communication between Raspberry Pi and smartphone we have two possibilities: either Bluetooth or over a local network. Since the user may already have the smartphone connected to a headphone or headset, we chose to use the smartphone's Wifi interface.
@@ -97,14 +105,6 @@ If the received strings only contains zeroes and is 256 (16x16) numbers long, it
 If the message contains also other ASCII characters, it will be interpreted as a string. Special characters (i.e. apersand, space) must be escaped before sending to the Raspberry Pi. The characters are converted with a special font to images and outputted on the matrix.
 
 \subsection{Communication between Raspberry Pi and the matrix}
-
-
-\section{Results}
-
-\subsection{Difficulties}
-
-
-\subsection{Description of working device}
 
 
 
