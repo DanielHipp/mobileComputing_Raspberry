@@ -17,7 +17,7 @@
 \IEEEauthorblockA{\textit{Faculty of Computer Science} \\
 \textit{HTWG Konstanz}\\
 Konstanz, Germany\\
-daniel.hipp@htwg-konstanz.de}
+dahipp@htwg-konstanz.de}
 \and
 \IEEEauthorblockN{Etienne Gramlich}
 \IEEEauthorblockA{\textit{Faculty of Computer Science} \\
@@ -51,7 +51,11 @@ An inexpensive replacement for a screen is a dot matrix, that can be easily conn
 
 
 \section{State of the Art}
+In this chapter we name three diffrent Products with similar behavior as our Matrix.
 
+First of all there is the TEBE \cite{ledtebe}, this Matrix has only one row for letters wich can be infinite long. Our Matrix got only one row too, but the length is limited by 16 LEDs. In contrast to our Matrix, there is the possibility to use multiple Color for the LEDs, colored text can be shown if needed, but no support for colored images is avaliable. To print some Letters on the TEBE Matrix, you need to use a windows application and set your text. Special characters like Stars are supported, but no image can be shown. Compared with our Matrix we just need a Smartphone to change the currently displaying message. So the TEBE is more suitable for static outputs, wich have only to be changed a few times a day. There is a timemanaging system, were you can define, how often your message should change, but you need to know this message at initialisation time. Therefore this module can be used inside and outside. Our Matrix is just suitable for dry environments. An extension to the TEBE Matrix is the Proline \cite{ledproline}. This serie supports multiple lines above, in theory there is no limitation for the number of rows to be used. But there is still no imagesupport as in our Matrix avaliable. It is possible to Print out different Characters on different rows with individual color, so you could try to do some ASCII-Arts but no real image can be shown.
+
+Another comparable product is the Eurolite ESN \cite{esn}. There is also just one row of Characters possible. Therefore each Pixel can be shown in different color. The output can be displayed in 14 different fonts, is able to blink if necessary and can move to any direction. Out Matrix just supports one direction and only one font with capital Letters and some special characters. Another nice Feature is that the current time can be displayed in different styles (DD.MM.YYYY, US/UK or MM.DD.YYYY). This feature could be implemented to our matrix in future work. Even though there is the possibility to color each LED separately, there is still no image support avaliable.
 
 
 \section{Proposed approach}
@@ -122,5 +126,14 @@ If the message contains also other ASCII characters, it will be interpreted as a
 \bibitem{b0} Elinux.org, ``RPi Low-level peripherals'' https://elinux.org/Rpi\_Low-level\_peripherals\#General\_Purpose\_Input.2FOutput\_.28GPIO.29, 2019
 \bibitem{b1} AZ-Delivery, ``4 x 64er LED Matrix Display'', https://www.az-delivery.de/products/4-x-64er-led-matrix-display?ls=de\&cache=false, 12. 01. 2019
 \bibitem{b2} Adafruit, ``Adafruit Mini 8x8 LED Matrix w/I2C Backpack - Yellow'', https://www.adafruit.com/product/870, 12. 01. 2019
+\bibitem{ledtebe}
+  ACT GmbH,
+  \textit{Laufschrift Serie TEBE}.
+\bibitem{ledproline}
+  ACT GmbH,
+  \textit{Laufschrift Serie Proline}.
+\bibitem{esn}
+  eurolite,
+  \textit{ESN 7x80 5mm LED-Laufschrift}.
 \end{thebibliography}
 \end{document}
