@@ -24,7 +24,7 @@ dahipp@htwg-konstanz.de}
 \IEEEauthorblockA{\textit{Faculty of Computer Science} \\
 \textit{HTWG Konstanz}\\
 Gailingen, Germany\\
-etgramli@gtwg-konstanz.de}
+etgramli@htwg-konstanz.de}
 \and
 \IEEEauthorblockN{Thomas Gnädig}
 \IEEEauthorblockA{\textit{Faculty of Computer Science} \\
@@ -68,7 +68,7 @@ Because text can be easily sent over the HTTP protocol, and 16x16 (=256) digits 
 \subsection{Coose the matrix}
 The matrix must be compatible with the Rasbperry Pi, but for testing the matrix itself the compatibility to Arduino is desirable. So the protocol must be either SPI or I2C, because both are supported on Raspberry Pi and Arduino.
 
-It also must not consume more energy than the Raspbery Pi and Arduiono can provide. So it must work at a volate of 3.3V or 5V and must draw at most 50mA and 300mA repectively\cite{b0}.
+It also must not consume more energy than the Raspbery Pi and Arduiono can provide. So it must work at a volate of 3.3V or 5V and must draw at most 50mA and 300mA repectively\cite{rpiperipherals}.
 
 If the full matrix is not composed of one single panel, the smaller pannels must be addressable individually. So that a wrapper library can be built that acts as a sinle panel and outputs part of the image on the respective sub-panel.
 
@@ -83,7 +83,7 @@ There are models with various sizes using the MAX7219 chip, which is an IC displ
 \section{Results}
 
 \subsection{Difficulties}
-Difficulties arose from the first matrix that we used. It was controlled by a MAX7219 chip, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{b1} worked on our Raspberry Pi 3. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit\cite{b2}.
+Difficulties arose from the first matrix that we used. It was controlled by a MAX7219 chip, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{azdelivery464} worked on our Raspberry Pi 3. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit\cite{adafruit88}.
 
 \subsection{Communication}
 For communication between Raspberry Pi and smartphone we have two possibilities: either Bluetooth or over a local network. Since the user may already have the smartphone connected to a headphone or headset, we chose to use the smartphone's Wifi interface.
@@ -136,17 +136,17 @@ If the message contains also other ASCII characters, it will be interpreted as a
 \bibitem{esn}
   eurolite,
   ``ESN 7x80 5mm LED-Laufschrift''.
-\bibitem{b0}
+\bibitem{rpiperipherals}
   Elinux.org,
   ``RPi Low-level peripherals'',
   \url{https://elinux.org/Rpi_Low-level_peripherals#General_Purpose_Input.2FOutput_.28GPIO.29},
   2019.
-\bibitem{b1}
+\bibitem{azdelivery464}
   AZ-Delivery,
   ``4 x 64er LED Matrix Display'',
   \url{https://www.az-delivery.de/products/4-x-64er-led-matrix-display?ls=de},
   12. 01. 2019.
-\bibitem{b2}
+\bibitem{adafruit88}
   Adafruit,
   ``Adafruit Mini 8x8 LED Matrix w/I2C Backpack - Yellow'',
   \url{https://www.adafruit.com/product/870},
