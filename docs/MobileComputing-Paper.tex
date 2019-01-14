@@ -76,11 +76,13 @@ There are models with various sizes using the MAX7219 chip, which is an IC displ
 
 
 \subsection{Communication between Raspberry Pi and the matrix}
+The communication interface between the Raspberry Pi and the matrix must support multiple connection, so that multiple matrices can be combined to one larger matrix. For example SPI supports multiple slaves (matrices) that would be connected to one master (the Raspberry Pi). Also I\textsuperscript{2}C supports multiple slaves by different addresses and even multiple masters, the latter is not important for our use case.
 
 \subsection{Communication between the Client and Server}
 
 
 \section{Results}
+Finally we use a Raspberry Pi to drive two dot matrices and act as an access point for the smartphone. It routes normal internet traffic through its LAN interface to the existing router. The detailed description of our solutions follows in this chapter.
 
 \subsection{Difficulties}
 Difficulties arose from the first matrix that we used. It was controlled by a MAX7219 chip, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{azdelivery464} worked on our Raspberry Pi 3. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit\cite{adafruit88}.
@@ -114,7 +116,9 @@ If the received strings only contains zeroes and is 256 (16x16) numbers long, it
 If the message contains also other ASCII characters, it will be interpreted as a string. Special characters (i.e. apersand, space) must be escaped before sending to the Raspberry Pi. The characters are converted with a special font to images and outputted on the matrix.
 
 \subsection{Communication between Raspberry Pi and the matrix}
+We use two 8x16 matrices above each other to form a large 16x16 matrix. Both are connected as slaves to the Raspberry Pi's I\textsuperscript{2}C interface. Therefore the two matrices need different addresses, so one of the matrices needs to be soldered to alter its default address.
 
+After that step both matrices can be used at the same I\textsuperscript{2}C interface at the Raspberry Pi. But since there are only python libraries for one 8x16 matrix, we wrote a wrapper so that both matrices appear as a single 16x16 matrix. So we can print images on the matrix, to write text on the matrix one needs a special font for low resultion screen. With that we can render the glyphs of the text and display them on the matrix. For long texts we implemented scrolling from right to left.
 
 
 \section{Conclusion}
