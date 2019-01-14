@@ -2,6 +2,7 @@
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
@@ -47,9 +48,9 @@ LED, dot matrix, LED matrix, Android, smartphone, WiFi, notification
 
 
 \section{Introduction}
-The goal of this project is to provide a screen to show notifications and text from a smartphone so that they are better visible. The next step is to provide image thumbnails on the screeen.
+The goal of this project is to provide a screen that show notifications and text from a smartphone so that they are better visible. It should stand alone somewhere in the room and is not intended as an extension to smartphone itself. The next step is to provide image thumbnails on the screeen.
 
-An inexpensive replacement for a screen is a dot matrix, that can be easily connected to an Arduino or Raspberry Pi. Due to the networking requirement of the task the Raspberry Pi version 3 seems to be the better choice over an Arduino. The latest Raspberry Pi has multiple network interfaces, such as LAN, WiFi and Bluetooth.
+An inexpensive replacement for a screen is a dot matrix, that consists of a rectangular array of LEDs. Such a dot matrix can be easily connected to an Arduino or Raspberry Pi. Due to the networking requirement of the task a Raspberry Pi version 3 seems to be the better choice over an Arduino. The latest Raspberry Pi has multiple network interfaces, such as LAN, WiFi and Bluetooth.
 
 
 \section{State of the Art}
@@ -61,25 +62,45 @@ Another comparable product is the Eurolite ESN \cite{esn}. There is also just on
 
 
 \section{Proposed approach}
-The application needs a server and a client, to receive text and image or to send them, respectively.
+Since our dot matrix should sit somewhere in the room, it must connect wirelessly to the user's smartphone. As smartphones usually have WiFi und Bluetooth interfaces built-in and do not contain a LAN interface, WiFi and Bluetooth are the intersection of both devices.
 
-Because text can be easily sent over the HTTP protocol, and 16x16 (=256) digits (0 or 1) for the iamges can be easily converted to text, we chose HTTP for transmission between the Raspberry Pi and smartphone.
+As with web servers threre are already well-established technologies, we decided to transfer our application's data over HTTP from the client to the server. The implementation approach is discussed in the following sections.
 
 
 \subsection{Coose the matrix}
-The matrix must be compatible with the Rasbperry Pi, but for testing the matrix itself the compatibility to Arduino is desirable. So the protocol must be either SPI or I2C, because both are supported on Raspberry Pi and Arduino.
+The matrix must be compatible with the Rasbperry Pi, but for testing purposes the compatibility to Arduino is desirable. So the protocol must be either SPI or I²C, because both are supported on Raspberry Pi and Arduino.
 
-It also must not consume more energy than the Raspbery Pi and Arduiono can provide. So it must work at a volate of 3.3V or 5V and must draw at most 50mA and 300mA repectively\cite{rpiperipherals}.
+It also must not consume more energy than the Raspbery Pi and Arduiono can provide, that makes it more easy to assemble and run. So it must work at a volate of 3.3V or 5V and must draw at most 50mA and 300mA repectively~\cite{rpiperipherals}.
 
-If the full matrix is not composed of one single panel, the smaller pannels must be addressable individually. So that a wrapper library can be built that acts as a sinle panel and outputs part of the image on the respective sub-panel.
+Since there are no square, pre-assembled matrices of a size of 16x16 or larger, we have to build one out of smaller dot matrices. So the individual matrix must be addressable individually. So that a wrapper library can be built that acts as a sinle panel and outputs part of the image on the respective sub-matrix.
 
-There are models with various sizes using the MAX7219 chip, which is an IC display driver for dot matrices and 7-segment LED displays. It that makes programming in Python very easy and is compatible with both Arduino and Raspberry Pi.
-
+There are models with various sizes using the MAX7219 chip, which is an IC display driver for dot matrices and 7-segment LED displays. It makes programming in Python very easy and is compatible with both Arduino and Raspberry Pi.
 
 \subsection{Communication between Raspberry Pi and the matrix}
 The communication interface between the Raspberry Pi and the matrix must support multiple connection, so that multiple matrices can be combined to one larger matrix. For example SPI supports multiple slaves (matrices) that would be connected to one master (the Raspberry Pi). Also I\textsuperscript{2}C supports multiple slaves by different addresses and even multiple masters, the latter is not important for our use case.
 
+{\color{red} ToDo: Thomas bitte kurz was darüber schreiben (Addressen, Verkabelung?, Wrapper)}
+
 \subsection{Communication between the Client and Server}
+Since WiFi and Bluetooth is the intersection of the Raspberry Pi's and smartphone's network interfaces, the communication must use one of those. Because the user may already have the smartphone connected to a headphone or headset, we chose to use the smartphone's Wifi interface. But to maintain normal smartphone usage, the internet connection that was previously possible by the user's WiFi, the Raspberry Pi must be connected to the internet via LAN and act as an access point for the smartpone. This way we can ensure that the Raspberry Pi has an static IP address, making the connection easier. Figure~\ref{FIG:COMMUNICATION} shows an overview of the network connection.
+
+\begin{figure}[ht]
+\label{FIG:COMMUNICATION}
+\centering
+\includegraphics[width=0.75\linewidth]{pics/RasPi-MC}
+\caption{Communication overview between Raspberry Pi, Smartphone and Router}
+\end{figure}
+
+To send text and images from the smartphone to the Raspberry Pi, we use HTTP requests containing the text itself (with escaped special characters), or the image encoded as '0's and '1's in a binary image.
+
+\subsection{WiFi access point}
+To function as an access point, the Raspberry Pi needs packages for the access point itself, a DHCP server and for network address translation (NAT). Therefore two daemons are needed, one for using the WiFi interface as an host for the access point (hostapd) and one DHCP daemon.
+
+The host access point daemon is configured to use the Raspberry Pi's built-in WiFi chip as the network interface and WPA2  encryption with a predefined password.
+
+The DHCP server must assign an address to the smartphone connecting to the WiFi. It also communicates the Raspberry Pi as the Gateway so that the smartphone can connect to the internet.
+
+Iptables is configured so that the smartphone in the Raspberry Pi's WiFi can access the internet through NAT at the Pi's LAN interface. This is solved that way, that new connections from the WiFi are accepted, but no new connections from the LAN NIC. Packages at the LAN NIC are only accepted, when they belong to an existing connection.
 
 
 \section{Results}
@@ -89,25 +110,7 @@ Finally we use a Raspberry Pi to drive two dot matrices and act as an access poi
 Difficulties arose from the first matrix that we used. It was controlled by a MAX7219 chip, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{azdelivery464} worked on our Raspberry Pi 3. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit\cite{adafruit88}.
 
 \subsection{Communication}
-For communication between Raspberry Pi and smartphone we have two possibilities: either Bluetooth or over a local network. Since the user may already have the smartphone connected to a headphone or headset, we chose to use the smartphone's Wifi interface.
 
-The Raspberry Pi has a LAN and WiFi interface, so we chose to create a new WiFi access point with the Raspberry Pi. This way we can make sure that the Raspberry Pi always has the same IP address, which makes connecting easier. To ensure the normal usage of the smartphone, after it connected to the Raspberry Pi, it must be connected to the existing router by a LAN cable prior to installation. This makes it also easier to set up the Raspberry Pi, because no WiFi passphrase of the original WiFi must be entered. Figure~\ref{FIG:COMMUNICATION} shows an overview of the communication.
-
-\begin{figure}[ht]
-\label{FIG:COMMUNICATION}
-\centering
-\includegraphics[width=0.75\linewidth]{pics/RasPi-MC}
-\caption{Communication overview between Raspberry Pi, Smartphone and Router}
-\end{figure}
-
-\subsection{WiFi access point}
-To function as an access point, the Raspberry Pi needs packages for the access point itself, a DHCP server and for network address translation (NAT). Therefore two daemons are needed, one for using the Wifi interface a an host for the access point (hostapd) and one DHCP daemon.
-
-The host access point daemon is configured to use wlan0 as the network interface (the Raspberry Pi's default one) and WPA2  encryption with a predefined password.
-
-The DHCP server must assign an address to the smartphone connecting to the WiFi. It also communicates the Raspberry Pi as the Gateway so that the smartphone can connect to the internet.
-
-Iptables is configured so that the smartphone in the Raspberry Pi's WiFi can access the internet through NAT at the Pi's LAN interface. This is solved that way, that new connections from the WiFi are accepted, but no new connections from the LAN NIC. Packages at the LAN NIC are only accepted, when they belong to an existing connection.
 
 \subsection{Communication between the Client and Server}
 The communication between the server software on the Raspberry Pi and the client on the smartphone is done with HTTP requests. Only strings can be sent to the Raspberry Pi, so images gave to be encoded as strings.
