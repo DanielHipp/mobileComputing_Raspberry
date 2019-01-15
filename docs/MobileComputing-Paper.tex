@@ -89,10 +89,10 @@ To Display an binary image, we just convert the incoming string to an binary 16x
 Since WiFi and Bluetooth is the intersection of the Raspberry Pi's and smartphone's network interfaces, the communication must use one of those. Because the user may already have the smartphone connected to a headphone or headset, we chose to use the smartphone's Wifi interface. But to maintain normal smartphone usage, the internet connection that was previously possible by the user's WiFi, the Raspberry Pi must be connected to the internet via LAN and act as an access point for the smartpone. This way we can ensure that the Raspberry Pi has an static IP address, making the connection easier. Figure~\ref{FIG:COMMUNICATION} shows an overview of the network connection. The communication between the smartphone App and the Pi is done by simple running a HTTP server on the Pi. To send data to the Matrix, the App just has to send an HTTP-GET request. The requested Page is not a real Page, it has to be the Message or Picture wich should be shown on the Matrix. To distinguish between a text and a image we defined a capital letter for both types. to send a text to the Pi, the get request has to look like this : GET /S\textit{text\_to\_display} for an image the letter I has to be used. Because the Matrix supports only on and off and no colors or brightnesses the image data is just made of ones and zeros. To representate the image as string it has to be converted to a 16x16 binary image. This has to be converted to a 16x16 binary array by using a threshold. Now the array has to be flattened and the result should be a vector with 256 entries, each can either be one or zero. to display this flattened image the get request should look like this : GET /I\textit{011010110...}. Whenever the server on the pi gets an HTTP-GET request, a method is called, to check if its a legal request and then interprets the payload as image or string, depending on the first letter.
 
 \begin{figure}[ht]
-\label{FIG:COMMUNICATION}
 \centering
 \includegraphics[width=0.75\linewidth]{pics/RasPi-MC}
 \caption{Communication overview between Raspberry Pi, Smartphone and Router}
+\label{FIG:COMMUNICATION}
 \end{figure}
 
 To send text and images from the smartphone to the Raspberry Pi, we use HTTP requests containing the text itself (with escaped special characters), or the image encoded as '0's and '1's in a binary image.
@@ -132,10 +132,10 @@ After that step both matrices can be used at the same I\textsuperscript{2}C inte
 After the user installed the app he is able to send a text or an image to the dot matrix. Additionally the app sends the icons of incoming notifications to the matrix. To achieve this, the app sends a http-request to the Rapsberry Pi with the text or image enbedded into the request. The requests are sended with the help from vollay, an Android library to send messages between multiple endpoints. The bitmaps of the images to be sent are scaled in size to 16x16 pixels and are converted to black-white binary images. At last they are changed into a string to make sendig over a HTTP request possible. The last point is the notification service which sends the notification's icon, which gets converted as normal images. The notification-service can be turned off by the user. Finally the user can use our app to show his favorit texts and images or notifications on a matrix. Figure~\ref{FIG:APP} shows the home screen of our app, leading to the options to send text and images.
 
 \begin{figure}[ht]
-\label{FIG:APP}
 \centering
 \includegraphics[width=0.75\linewidth]{pics/AppHomeScreen}
 \caption{Home screen of our Android app}
+\label{FIG:APP}
 \end{figure}
 
 
