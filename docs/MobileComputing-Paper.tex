@@ -128,6 +128,16 @@ We use two 8x16 matrices above each other to form a large 16x16 matrix. Both are
 
 After that step both matrices can be used at the same I\textsuperscript{2}C interface at the Raspberry Pi. But since there are only python libraries for one 8x16 matrix, we wrote a wrapper so that both matrices appear as a single 16x16 matrix. So we can print images on the matrix, to write text on the matrix one needs a special font for low resultion screen. With that we can render the glyphs of the text and display them on the matrix. For long texts we implemented scrolling from right to left.
 
+\subsection{The Android App}
+After the user installed the app he is able to send a text or an image to the dot matrix. Additionally the app sends the icons of incoming notifications to the matrix. To achieve this, the app sends a http-request to the Rapsberry Pi with the text or image enbedded into the request. The requests are sended with the help from vollay, an Android library to send messages between multiple endpoints. The bitmaps of the images to be sent are scaled in size to 16x16 pixels and are converted to black-white binary images. At last they are changed into a string to make sendig over a HTTP request possible. The last point is the notification service which sends the notification's icon, which gets converted as normal images. The notification-service can be turned off by the user. Finally the user can use our app to show his favorit texts and images or notifications on a matrix. Figure~\ref{FIG:APP} shows the home screen of our app, leading to the options to send text and images.
+
+\begin{figure}[ht]
+\label{FIG:APP}
+\centering
+\includegraphics[width=0.75\linewidth]{pics/AppHomeScreen}
+\caption{Home screen of our Android app}
+\end{figure}
+
 
 \section{Conclusion}
 
