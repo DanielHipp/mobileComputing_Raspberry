@@ -64,7 +64,7 @@ Another comparable product is the Eurolite ESN \cite{esn}. There is also just on
 \section{Proposed approach}
 Since our dot matrix should sit somewhere in the room, it must connect wirelessly to the user's smartphone. As smartphones usually have WiFi und Bluetooth interfaces built-in and do not contain a LAN interface, WiFi and Bluetooth are the intersection of both devices.
 
-As with web servers threre are already well-established technologies, we decided to transfer our application's data over HTTP from the client to the server. The implementation approach is discussed in the following sections.
+As with web servers threre are already well-established technologies, we decided to transfer our application's data over HTTP from the client to the server. We will programm an Android app, so that the user can easily interact with our matrix. The implementation approach is discussed in the following sections.
 
 
 \subsection{Coose the matrix}
@@ -107,7 +107,7 @@ Iptables is configured so that the smartphone in the Raspberry Pi's WiFi can acc
 Finally we use a Raspberry Pi to drive two dot matrices and act as an access point for the smartphone. It routes normal internet traffic through its LAN interface to the existing router. The detailed description of our solutions follows in this chapter.
 
 \subsection{Difficulties}
-Difficulties arose from the first matrix that we used. It was controlled by a MAX7219 chip, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{azdelivery464} worked on our Raspberry Pi 3. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit\cite{adafruit88}.
+Difficulties arose from the first matrix that we used. It was a 8x32 controlled by a MAX7219 chip~\cite{azdelivery464}, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{azdelivery464} worked on our Raspberry Pi 3, the matrix only printed random looking patterns. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit~\cite{adafruit88}. That new matrix worked flawlessly with the Raspberry Pi, and has a ``backpack'' with an I²C interface, instead of SPI.
 
 \subsection{Communication}
 
