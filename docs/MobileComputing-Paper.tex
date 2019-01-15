@@ -154,6 +154,13 @@ As new Feature a clock could be implemented, wich shows the current time, whenev
 \subsection{Server Security}
 Since the web server is not secured, multiple smartphones can connect to the Raspberry Pi and all of them can send messages to the Raspberry Pi simulateously. One possibility is that only one smartphone should be able to connect to the server. It can be achieved by a code, that is displayed on the matrix and entered on the smartphone. This makes sure that only the first smartphone is able to send messages. Optionally an encryptet HTTP connection could be used, to make the messages not readable for third parties.
 
+\subsection{Case and power supply}
+A relative simple improvement to the current status of our project is a nice case that contains the Rapberry Pi and provides an outlet for the matrix.
+
+For the current setup with a Raspberry Pi 3 and a 16x16 matrix requires the power that a standard power supply can deliver. Our project should actually be powered in that way, becuase it also need a LAN cable is therefore stationary by design.
+
+Another idea is to make the project mobile, which would requre a battery contained in the case. But this needs regular recharging. The real problem with this approach is, that we would need to connect to an existing WiFi network which usually use a passphrase for encryption and we do not have a possibility for the end user to enter the password.
+
 
 %%--- Write text above here, all references below here ---%%
 \begin{thebibliography}{00}
