@@ -138,6 +138,7 @@ There are some parts in our project, that can be improved or further developed. 
 
 \subsection{Dot Matrix}
 Improvements can be made with better matrices, for example multi-color matrices or those that can be dimmed, to display a color image or a greyscale image respectively. A bigger matrix is possible, too. All this needs more computing power, but the Raspberry Pi is easily capable of this task, but an Arduino might not capable of that. The replacement of the matrix makes changes to the wrapper inevitable and one has to consider the power consumption of a larger matrix.
+As new Feature a clock could be implemented, wich shows the current time, whenever no requests are incoming. So it could be used as simple clock even without a smartphone connected.
 
 \subsection{Server Security}
 Since the web server is not secured, multiple smartphones can connect to the Raspberry Pi and all of them can send messages to the Raspberry Pi simulateously. One possibility is that only one smartphone should be able to connect to the server, i.e. only the first smartphone is able to send messages. Optionally an encryptet HTTP connection could be used, to make the messages not readable for third parties.
