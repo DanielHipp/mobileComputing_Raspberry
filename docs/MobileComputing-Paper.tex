@@ -114,7 +114,7 @@ Finally we use a Raspberry Pi to drive two dot matrices and act as an access poi
 Difficulties arose from the first matrix that we used. It was a 8x32 controlled by a MAX7219 chip~\cite{azdelivery464}, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{azdelivery464} worked on our Raspberry Pi 3, the matrix only printed random looking patterns. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit~\cite{adafruit88}. That new matrix worked flawlessly with the Raspberry Pi, and has a ``backpack'' with an I²C interface, instead of SPI.
 
 \subsection{Communication}
-
+The Raspberry Pi is our connection hub and main device. It has to connect the smartphone to the matrix and so has to maintain connection to both. The Raspberry Pi also delivers the power for the matrix from its own power supply.
 
 \subsection{Communication between the Client and Server}
 The communication between the server software on the Raspberry Pi and the client on the smartphone is done with HTTP requests. Only strings can be sent to the Raspberry Pi, so images gave to be encoded as strings.
@@ -137,10 +137,10 @@ After that step both matrices can be used at the same I\textsuperscript{2}C inte
 There are some parts in our project, that can be improved or further developed. The most important ideas will be discusst in the following sections.
 
 \subsection{Dot Matrix}
-Improvements can be made with better matrices, for example multi-color matrices or those that can be dimmed, to display a color image or a greyscale image respectively. A bigger matrix is possible, too. All this needs more computing power, but the Raspberry Pi is easily capable of this task, but an Arduino might not capable of that. The replacement of the matrix makes changes to the wrapper inevitable and one has to consider the power consumption of a larger matrix.
+Improvements can be made with better matrices, for example multi-color matrices or those that can be dimmed, to display a color image or a greyscale image respectively. A bigger matrix is possible, too. All this needs more computing power, but the Raspberry Pi is easily capable of this task, but an Arduino might not capable of that. The replacement of the matrix makes changes to the wrapper inevitable and one has to consider the power consumption of a larger matrix, a 32x32 dot matrix might draw up to 4A at 5V.
 
 \subsection{Server Security}
-Since the web server is not secured, multiple smartphones can connect to the Raspberry Pi and all of them can send messages to the Raspberry Pi simulateously. One possibility is that only one smartphone should be able to connect to the server, i.e. only the first smartphone is able to send messages. Optionally an encryptet HTTP connection could be used, to make the messages not readable for third parties.
+Since the web server is not secured, multiple smartphones can connect to the Raspberry Pi and all of them can send messages to the Raspberry Pi simulateously. One possibility is that only one smartphone should be able to connect to the server. It can be achieved by a code, that is displayed on the matrix and entered on the smartphone. This makes sure that only the first smartphone is able to send messages. Optionally an encryptet HTTP connection could be used, to make the messages not readable for third parties.
 
 
 %%--- Write text above here, all references below here ---%%
@@ -169,6 +169,11 @@ Since the web server is not secured, multiple smartphones can connect to the Ras
   ``Adafruit Mini 8x8 LED Matrix w/I2C Backpack - Yellow'',
   \url{https://www.adafruit.com/product/870},
   12. 01. 2019.
+\bibitem{adafruit3232}
+  Adafruit,
+  ``32x32 RGB LED Matrix Panel - 6mm pitch'',
+  \url{https://www.adafruit.com/product/1484},
+  15. 01. 2019.
 \bibitem{ledlibrary}
   Adafruit,
   ``Adafruit Python LED Backpack'',
