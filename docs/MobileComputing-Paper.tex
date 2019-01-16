@@ -10,8 +10,7 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{hyperref}
-\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
 \begin{document}
 
 \title{Dot Matrix Notifier}
@@ -38,12 +37,13 @@ thomas.gnaedig@htwg-konstanz.de}
 \maketitle
 
 \begin{abstract}
-ToDo
+În this paper we introduce our approach to a Raspberry Pi controlled dot matrix used for displaying text and images and notifying in case of incoming messages. Our proposed approach will be explained, with also the difficulties with the matrix and the final result.
+
+The Raspberry Pi will be connected to the router via LAN for internet access and to the dot matrix it controlls. The user's smartphone will be connected to the Raspberry Pi' WiFi interace that acts as an access point. From now on the smartphone can send HTTP requests to the Raspberry Pi, that prints the containing text and images on the matrix.
 \end{abstract}
 
-
 \begin{IEEEkeywords}
-LED, dot matrix, LED matrix, Android, smartphone, WiFi, notification
+LED, dot matrix, LED matrix, Android, smartphone, WiFi, notification, client server
 \end{IEEEkeywords}
 
 
