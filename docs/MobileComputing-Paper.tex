@@ -111,7 +111,7 @@ Iptables is configured so that the smartphone in the Raspberry Pi's WiFi can acc
 Finally we use a Raspberry Pi to drive two dot matrices and act as an access point for the smartphone. It routes normal internet traffic through its LAN interface to the existing router. The detailed description of our solutions follows in this chapter.
 
 \subsection{Difficulties}
-Difficulties arose from the first matrix that we used. It was a 8x32 controlled by a MAX7219 chip~\cite{azdelivery464}, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{azdelivery464} worked on our Raspberry Pi 3, the matrix only printed random looking patterns. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit~\cite{adafruit88}. That new matrix worked flawlessly with the Raspberry Pi, and has a ``backpack'' with an I²C interface, instead of SPI.
+Difficulties arose from the first matrix that we used. It was a 8x32 controlled by a MAX7219 chip~\cite{azdelivery464}, that was supposed to work with both Arduino and Raspberry Pi. Not even the example code from the manufacturer's repository~\cite{azdelivery464} worked on our Raspberry Pi 3, the matrix only printed random looking patterns. Neither a level shifter from 5V to 3.3V nor a separate power supply for the dot matrix did solve the problem. Therefore we moved to dot matrices from Adafruit~\cite{adafruit88}. That new matrix worked flawlessly with the Raspberry Pi, and has a ``backpack'' with an I\textsuperscript{2}C interface, instead of SPI.
 
 \subsection{Communication}
 The Raspberry Pi is our connection hub and main device. It has to connect the smartphone to the matrix and so has to maintain connection to both. The Raspberry Pi also delivers the power for the matrix from its own power supply.
@@ -139,12 +139,9 @@ After the user installed the app he is able to send a text or an image to the do
 \end{figure}
 
 
-\section{Conclusion}
-
-
-
-\section{Further Work}
-There are some parts in our project, that can be improved or further developed. The most important ideas will be discusst in the following sections.
+\section{Conclusion and Future Work}
+This Project was done in a short period of time during a semester, we got a great idea of what to do and had to handle some complications. Especially the problems with SPI Matrix, took us a lot of time. In case, that no solution could be found quickly, we switched to I\textsuperscript{2}C. With the new Matrix we could implement our Ideas and got a well working Dot Matrix Notifier.
+There are still some parts in our project, that can be improved or further developed. The most important ideas will be discusst in the following sections.
 
 \subsection{Dot Matrix}
 Improvements can be made with better matrices, for example multi-color matrices or those that can be dimmed, to display a color image or a greyscale image respectively. A bigger matrix is possible, too. All this needs more computing power, but the Raspberry Pi is easily capable of this task, but an Arduino might not capable of that. The replacement of the matrix makes changes to the wrapper inevitable and one has to consider the power consumption of a larger matrix, a 32x32 dot matrix might draw up to 4A at 5V.
