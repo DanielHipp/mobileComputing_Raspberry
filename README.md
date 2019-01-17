@@ -1,5 +1,10 @@
 # Mobile Computing: Notification Matrix
 
+This project is createt for the lecture "MobileComputin" at the HTWG Konstanz Department of Computer Science.
+The project needs an [outliner](https://github.com/DanielHipp/mobileComputing/wiki/Outliner) and contains an [paper](https://github.com/DanielHipp/mobileComputing_Raspberry/blob/master/docs/MobileComputing-Paper.pdf) and a presentation.
+
+In this repository the Raspberry Pi code can be found. To see the sourcecode for the Android App take a look at the other [Repo](https://github.com/DanielHipp/mobileComputing)
+
 
 ## Introduction
 This is the backend on the Raspberry Pi 3, that receives input (text and images) from a smartphone and displays it on a 16x16 dot matrix.
@@ -29,16 +34,10 @@ Here is an overview of the networking with the Raspberry Pi, smartphone and the 
 
 
 ## Technical
+[Max7219 Datasheet](https://datasheets.maximintegrated.com/en/ds/MAX7219-MAX7221.pdf)
 
-### Datenblatt zu MAX7219
-
-[Max7219 Datenblatt](https://datasheets.maximintegrated.com/en/ds/MAX7219-MAX7221.pdf)
-
-[Netter Guide](https://tutorials-raspberrypi.de/led-max7219-dot-matrix-projekt-uebersicht/)
-[Python Guide](https://codingworld.io/project/8x8-led-matrix-anschliessen-und-programmieren)
+[simple guide for max7219](https://tutorials-raspberrypi.de/led-max7219-dot-matrix-projekt-uebersicht/)
 
 
 ![pinout](http://images.gutefrage.net/media/fragen-antworten/bilder/137534877/0_big.jpg)
-
-[Händler-Seite](https://www.az-delivery.de/products/4-x-64er-led-matrix-display?ls=de#description)
 
