@@ -399,5 +399,6 @@ class fontPlaceholder:
 	
 	def toArray(self, zeichen):
 		if zeichen in self.font:
+			debug = self.font[zeichen]
 			return self.font[zeichen]
 		return self.none

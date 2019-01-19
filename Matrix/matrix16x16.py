@@ -20,8 +20,7 @@ class Matrix16x16:
     def draw8x16(self, display, np_array):
         assert (np_array.shape == (8, 16))
         if self.debug:
-            print(np_array) #debug=Keine LEDMatrix verfuegbar
-            return
+            return np_array #debug=Keine LEDMatrix verfuegbar
         if display is None:
             return
         display.clear()
@@ -34,13 +33,13 @@ class Matrix16x16:
 
     #Zeichnet aktuelles 16x16 Bild auf gesammte Matrix
     def draw_Image(self, data):
-        #if self.flip:
-        #    data = np.flip(data, axis=1)
         tmp = data[:, :16]
-        self.draw8x16(self.top, tmp[:8])
-        self.draw8x16(self.bot, tmp[8:])
+        a1 = self.draw8x16(self.top, tmp[:8])
+        a2 = self.draw8x16(self.bot, tmp[8:])
         if self.debug:
-            print("\n########################################\n")
+            return a1, a2
+        return None, None
+
     # text=string wird in np_array umgewandelt (oben und unten=freier Rand von 4 Pixel)
     def string_to_array(self, text):
         textArray = np.zeros((8, 1),dtype=int)
@@ -56,20 +55,25 @@ class Matrix16x16:
         if padding:
             data_Array = self.add_padding(data_Array, True) # Leeres Feld davor
             data_Array = self.add_padding(data_Array, False)# Leeres Feld danach
-        self.shift_long_data(data_Array)
+        list = self.shift_long_data(data_Array)
+        return list
 
     def shift_long_data(self, data, speed=0.125):
         max = data.shape[1]
         offset = 0
+        dbuglist = []
         if self.flip:
             offset = 15             # Text in andere richtung durchlaufen index 0->15 index 15->0
         array = np.zeros((16, 16), dtype=int)  # Bildausschnitt 16x16
         for i in range(max-15):
             for k in range(16):
                 array[:, offset - k] = data[:, i+k]
-            self.draw_Image(array)
+
+            upper,lower = self.draw_Image(array)
+            if self.debug:
+                dbuglist.append((np.concatenate((upper,lower),axis=0)))
             time.sleep(speed)
-        return
+        return dbuglist
 
 
     def add_padding(self, data, front):
@@ -84,5 +88,5 @@ if __name__ == '__main__':
     print("okay, lets go!")
     matrix = Matrix16x16(debug=True)
     matrix.draw_Image(np.zeros((16,16), dtype=int))
-    matrix.write_string("AAA")
+    list = matrix.write_string("AAA")
 
