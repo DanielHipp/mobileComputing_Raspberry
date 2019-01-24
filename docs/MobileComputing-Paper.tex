@@ -69,7 +69,7 @@ Since our dot matrix should sit somewhere in the room, it must connect wirelessl
 As with web servers threre are already well-established technologies, we decided to transfer our application's data over HTTP from the client to the server. We will programm an Android app, so that the user can easily interact with our matrix. The implementation approach is discussed in the following sections.
 
 
-\subsection{Coose the matrix}
+\subsection{Choose the matrix}
 The matrix must be compatible with the Rasbperry Pi, but for testing purposes the compatibility to Arduino is desirable. So the protocol must be either SPI or I\textsuperscript{2}C, because both are supported on Raspberry Pi and Arduino.
 
 It also must not consume more energy than the Raspbery Pi and Arduiono can provide, that makes it more easy to assemble and run. So it must work at a voltage of 3.3V or 5V and must draw at most 50mA and 300mA repectively~\cite{rpiperipherals}.
